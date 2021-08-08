@@ -36,7 +36,7 @@ async def on_message(message):
                 Story = Story + '\n' + passage
                 await message.channel.send('Okay, I got that!')
                 await message.channel.send(Story)
-
+#have to fix the author-queue lock.
                 if len(Queue) == 1:
                    await message.channel.send('That\'s all for the day.')
                 else:
@@ -63,6 +63,9 @@ async def on_message(message):
         tag = str(Queue[0].name) + ', you\'re next'
         await message.channel.send(tag)
         
+    if message.content.startswith('$karen-reset'):
+        Story = ''
+        Queue = []
 
 TOKEN = os.getenv("TOKEN")
 client.run(TOKEN)
