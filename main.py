@@ -64,7 +64,19 @@ async def on_message(message):
             await message.channel.send(Story)
 
     if message.content.startswith('-help'):
-        await message.channel.send('Where\'s your manager? You work for me; I don’t work for you.')
+        help_message = ''' __**KarenBot Help**__
+        
+**-me** *Adds user to queue.*
+**-read [text]** *Appends the text to the larger corpus.*
+**-narrate** *Shares the full body of work till that point.*
+**-queue** *Displays order of users currently in the queue.*
+
+__The next two commands require the user to have 'Manage Messages' permission.__
+
+**-skip** *Passes over the current user in the queue.*
+**-reset** *Clears the queue and the corpus.*'''
+
+        await message.channel.send(help_message)
     
     if message.content.startswith('-skip'):
         if message.author.guild_permissions.manage_messages == True or message.author == Queue[0]:
