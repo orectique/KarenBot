@@ -1,3 +1,4 @@
+![GitHub](https://img.shields.io/github/license/orectique/KarenBot)
 ## Welcome to KarenBot.
 
 KarenBot is a Discord bot that can be used to order a discussion. It allows users in the server to add themselves to a queue to formally voice their points.
