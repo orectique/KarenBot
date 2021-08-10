@@ -44,6 +44,7 @@ async def on_message(message):
             tag = str(message.author.name) + ', please wait for your turn.'
             return await message.channel.send(tag)
 
+        
         passage = message.content
         if passage[5] == '':
             passage = passage[6:]
@@ -57,9 +58,13 @@ async def on_message(message):
             channels[channel_id]["Queue"] = []
             return await message.channel.send('There\'s nobody in the queue!')
         
+                
         channels[channel_id]["Queue"] = channels[channel_id]["Queue"][1:]
         tag = str(channels[channel_id]["Queue"][0].name) + ', you\'re next'
         await message.channel.send(tag)
+
+        if len(channels[channel_id]["Queue"]) == 2:
+            await message.channel.send('There\'s only one person left in the queue!')
 
 
     if message.content.startswith('-narrate'):
