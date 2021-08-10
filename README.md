@@ -16,6 +16,8 @@ KarenBot is a Discord bot that can be used to order a discussion. It allows user
 >> Shares the full body of work till that point.
 - -queue
 >> Displays order of users currently in the queue.
+- -skip
+>> Skips self on one's own turn.
 - -CoC
 >> Helps one access the Rules and Code of Conduct of KarenBot.
 
