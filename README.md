@@ -1,4 +1,4 @@
-![GitHub](https://img.shields.io/github/license/orectique/KarenBot) ![Hit count](https://hits.vercel.app/orectique/karenbot.svg)
+![GitHub](https://img.shields.io/github/license/orectique/KarenBot) ![Hit count](https://hits.vercel.app/orectique/karenbot.svg) ![Custom badge](https://img.shields.io/endpoint?color=light-blue&label=Add%20me%20to%20your%20Server&logo=Discord&style=social&url=%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize%3Fclient_id%3D873981661187039263%26permissions%3D100352%26scope%3Dbot)
 
 ## Welcome to KarenBot.
 
