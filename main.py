@@ -10,15 +10,12 @@ async def on_ready():
     print('Bot is ready')
 
 Story = ''
-Count = []
 Queue = []
 
 @client.event
 async def on_message(message):
     global Queue
     global Story
-    global Count
-    global Mod
 
     if message.author == client.user:
         return
@@ -46,6 +43,7 @@ async def on_message(message):
             passage = passage[6:]
         else:
             passage = passage[5:]
+            
         Story = Story + '\n' + passage
         await message.channel.send('Okay, I got that!')
 
@@ -117,6 +115,17 @@ __The next two commands require the user to have 'Manage Messages' permission.__
 
     if message.content.startswith('-CoC'):
         await message.channel.send('https://hackclub.us/karenbot-code-of-conduct')
+
+    if message.content.startswith('-export'):
+        name = message.content
+        name = name[8:] + '.txt'
+        file = open('content.txt', 'w')
+        file.write(Story)
+        file.close()
+        with open('content.txt', 'rb') as fp:
+            await message.channel.send(file=discord.File(fp, name))
+
+        os.remove('content.txt')
 
 TOKEN = os.getenv("TOKEN")
 client.run(TOKEN)
