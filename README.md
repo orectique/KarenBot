@@ -16,9 +16,13 @@ KarenBot is a Discord bot that can be used to order a discussion. It allows user
 >> Shares the full body of work till that point.
 - -queue
 >> Displays order of users currently in the queue.
+- -CoC
+>> Helps one access the Rules and Code of Conduct of KarenBot.
 
 #### High level commands - User needs the 'Manage Messages' permission
 - -skip
 >> Passes over the current user in the queue.
 - -reset
 >> Clears the queue and the corpus.
+- -export
+>> Creates a downloadable .txt file and shares it in the channel.

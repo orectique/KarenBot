@@ -1,6 +1,4 @@
 import discord
-from collections import Counter
-import pandas
 import os
 
 client = discord.Client()
@@ -9,16 +7,27 @@ client = discord.Client()
 async def on_ready():
     print('Bot is ready')
 
-Story = ''
-Queue = []
+channels = {}
 
 @client.event
 async def on_message(message):
-    global Queue
-    global Story
+
+    global channels
 
     if message.author == client.user:
         return
+
+    channel_id = message.channel.id
+
+    if channel_id not in channels:
+        channels[channel_id] = {
+          "Queue": [],
+          "Story": ''
+        }
+    
+    Queue = channels[channel_id]["Queue"]
+    Story = channels[channel_id]["Story"]
+
 
     if message.content.startswith('-me'):
         if len(Queue) != 0 and message.author == Queue[-1]:
@@ -43,8 +52,8 @@ async def on_message(message):
             passage = passage[6:]
         else:
             passage = passage[5:]
-            
-        Story = Story + '\n' + passage
+
+        Story += '\n' + passage
         await message.channel.send('Okay, I got that!')
 
         if len(Queue) == 1:
@@ -69,11 +78,15 @@ async def on_message(message):
 **-read [text]** *Appends the text to the larger corpus.*
 **-narrate** *Shares the full body of work till that point.*
 **-queue** *Displays order of users currently in the queue.*
+**-CoC** *Helps one access the Rules and Code of Conduct of KarenBot.*
 
 __The next two commands require the user to have 'Manage Messages' permission.__
 
 **-skip** *Passes over the current user in the queue.*
-**-reset** *Clears the queue and the corpus.*'''
+**-reset** *Clears the queue and the corpus.*
+**-export** *Creates a downloadable .txt file and shares it in the channel.*
+
+'''
 
         await message.channel.send(help_message)
     
@@ -87,17 +100,21 @@ __The next two commands require the user to have 'Manage Messages' permission.__
         tag = str(Queue[0].name) + ' was skipped.'
         await message.channel.send(tag)
         
-        if len(Queue) != 0:
+        if len(Queue) > 1 :
             Queue = Queue[1:]
             tag = str(Queue[0].name) + ', you\'re next'
             await message.channel.send(tag)
+        
+        elif len(Queue) == 1:
+            Queue = []
+            await message.channel.send('The queue looks empty.')
 
         else:
             await message.channel.send('The queue looks empty.')
             
 
     if message.content.startswith('-reset'):
-        if message.author.guild_permissions.manage_messages == True:  
+        if message.author.guild_permissions.manage_messages:
             Story = ''
             Queue = []
             await message.channel.send('KarenBot has been reset.')
@@ -116,11 +133,11 @@ __The next two commands require the user to have 'Manage Messages' permission.__
     if message.content.startswith('-CoC'):
         await message.channel.send('https://hackclub.us/karenbot-code-of-conduct')
 
-    if message.content.startswith('-export'):
+    if message.content.startswith('-export') and message.author.guild_permissions.manage_messages == True:
         name = message.content
         name = name[8:] + '.txt'
         file = open('content.txt', 'w')
-        file.write(Story)
+        file.write(channels[channel_id]['Story'])
         file.close()
         with open('content.txt', 'rb') as fp:
             await message.channel.send(file=discord.File(fp, name))
