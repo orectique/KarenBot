@@ -128,7 +128,7 @@ async def on_message(message):
 **-queue** *Displays order of users currently in the queue.*
 **-CoC** *Helps one access the Rules and Code of Conduct of KarenBot.*
 
-__The next two commands require the user to have 'Manage Messages' permission.__
+__The next three commands require the user to have 'Manage Messages' permission.__
 
 **-skip** *Passes over the current user in the queue.*
 **-reset** *Clears the queue and the corpus.*
