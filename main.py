@@ -83,14 +83,17 @@ async def on_message(message):
         passage = message.content
         passage = passage[5:]
         if lock == 0:
-            if '-a' in message.content:
+            if '-a' in message.content[:8]:
                 channels[channel_id]["Note"] += '\n' + str(message.author) + ' : ' + passage[3:]
-            if '-t' in message.content:
+            elif '-t' in message.content[:8]:
                 channels[channel_id]["Note"] += '\n' + '[' + str(Timestamp) + ']: ' + passage[3:]
-            if '-f' in message.content:
-                channels[channel_id]["Note"] += '\n' + str(message.author) + ' at [' + str(Timestamp) + ']: ' + passage[4:]
+            elif '-f' in message.content[:8]:
+                channels[channel_id]["Note"] += '\n' + str(message.author) + ' at [' + str(Timestamp) + ']: ' + passage[3:]
+            else:
+                channels[channel_id]["Note"] += '\n' + passage
+        
         else:
-            channels[channel_id]["Note"] += '\n' + passage
+            channels[channel_id]["Note"] += '\n' + str(message.author) + ' at [' + str(Timestamp) + ']: ' + passage[3:]
         
         await message.channel.send(choice(replies))
 
@@ -104,7 +107,7 @@ async def on_message(message):
             else:     
                 await message.channel.send(channels[channel_id]["Story"])
 
-        if '-o' in message.content:
+        elif '-o' in message.content:
             if len(channels[channel_id]["Note"]) == 0:
                 await message.channel.send('You haven\'t written anything yet!')
             elif len(channels[channel_id]["Note"]) > 2000:
