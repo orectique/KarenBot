@@ -12,8 +12,10 @@ KarenBot is a Discord bot that can be used to order a discussion or take notes a
 >> Adds user to queue.
 - -read [text]
 >> Appends the text to the larger corpus.
-- -narrate
->> Shares the full body of work till that point.
+- -note -a/t/f
+>> Takes notes. Works exclusive to the queue. -a/t/f are format modifiers to use when 'f' is unlocked (See -flock/-funlock): '-a' registers author's name along with the message, '-t' adds the timestamp on the message, and 'f' displays both the details.
+- -narrate -s/o
+>> Shares the full body of work till that point. Access specifiers '-s' refers to the log of -read and '-o' refers to the log of -note.
 - -queue
 >> Displays order of users currently in the queue.
 - -CoC
@@ -22,7 +24,9 @@ KarenBot is a Discord bot that can be used to order a discussion or take notes a
 #### High level commands - User needs the 'Manage Messages' permission
 - -skip
 >> Passes over the current user in the queue.
+- -flock/-funlock
+>> Enables/Disables the 'f' lock. If 'f' is locked, Karen always registers the timestamp and author of the note. Works with -note.
 - -reset
 >> Clears the queue and the corpus.
-- -export
+- -export -s/o
 >> Creates a downloadable .txt file and shares it in the channel.

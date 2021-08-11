@@ -117,8 +117,9 @@ async def on_message(message):
         help_message = ''' __**KarenBot Help**__
         
 **-me** *Adds user to queue.*
-**-read [text]** *Appends the text to the larger corpus.*
-**-narrate -s/o** *Shares the full body of work till that point. Argument s returns regular corpus, while n returns timestamped notes.*
+**-read [text]** *Appends the sequenced text to the larger corpus.*
+**-note -a/t/f** *Appends text to timestamped corpus*
+**-narrate -s/o** *Shares the full body of work till that point.*
 **-queue** *Displays order of users currently in the queue.*
 **-CoC** *Helps one access the Rules and Code of Conduct of KarenBot.*
 
