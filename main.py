@@ -131,7 +131,7 @@ async def on_message(message):
 __The next three commands require the user to have 'Manage Messages' permission.__
 
 **-skip** *Passes over the current user in the queue.*
-**-reset** *Clears the queue and the corpus.*
+**-reset -s/o** *Clears the queue and the corpus.*
 **-export -s/o** *Creates a downloadable .txt file and shares it in the channel.*
 
 '''
@@ -161,12 +161,19 @@ __The next three commands require the user to have 'Manage Messages' permission.
             await message.channel.send('The queue looks empty.')
             
 
-    if message.content.startswith('-reset'):
+    if message.content.startswith('-reset -s'):
         if message.author.guild_permissions.manage_messages:
             channels[channel_id]["Story"] = ''
-            channels[channel_id]["Note"] = ''
             channels[channel_id]["Queue"] = []
-            await message.channel.send('KarenBot has been reset.')
+            await message.channel.send('KarenBot Corpus has been reset.')
+        else:
+            await message.channel.send('You do not have the authority to reset KarenBot.')
+
+
+    if message.content.startswith('-reset -o'):
+        if message.author.guild_permissions.manage_messages:
+            channels[channel_id]["Note"] = ''
+            await message.channel.send('KarenBot Notes have been reset.')
         else:
             await message.channel.send('You do not have the authority to reset KarenBot.')
 

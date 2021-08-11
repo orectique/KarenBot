@@ -26,7 +26,7 @@ KarenBot is a Discord bot that can be used to order a discussion or take notes a
 >> Passes over the current user in the queue.
 - -flock/-funlock
 >> Enables/Disables the 'f' lock. If 'f' is locked, Karen always registers the timestamp and author of the note. Works with -note.
-- -reset
->> Clears the queue and the corpus.
+- -reset -s/o
+>> Clears the queue and the specified corpus.
 - -export -s/o
 >> Creates a downloadable .txt file and shares it in the channel.
