@@ -72,9 +72,11 @@ async def on_message(message):
 
     if message.content.startswith('-flock') and message.author.guild_permissions.manage_messages == True:
         lock = 1
+        await message.channel.send('Name and Timestamp are enabled as default.')
     
     if message.content.startswith('-funlock') and message.author.guild_permissions.manage_messages == True:
         lock = 0
+        await message.channel.send('Name and Timestamp are disabled as default.')
 
     if message.content.startswith('-note'):
         Timestamp = message.channel.created_at
